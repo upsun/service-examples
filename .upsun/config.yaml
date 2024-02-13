@@ -9,16 +9,16 @@ applications:
         #     flavor: none
         source:
             root: main
-        # hooks:
-        #     build: |
-        #         # Fail the build if any errors occur
-        #         set -eux
+        hooks:
+            build: |
+                # Fail the build if any errors occur
+                set -eux
 
-        #         # # Download the latest version of pip
-        #         # python -m pip install --upgrade pip
+                # # Download the latest version of pip
+                # python -m pip install --upgrade pip
 
-        #         # Install dependencies
-        #         pip install -r requirements.txt   
+                # Install dependencies
+                pip install -r requirements.txt   
         relationships:
             elasticsearch: 'elasticsearch:elasticsearch'
             # headlesschrome: 'headlesschrome:http'
