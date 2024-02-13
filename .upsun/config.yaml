@@ -1,23 +1,23 @@
 applications:
 
     main:
-        type: python:3.12
+        # type: python:3.11
+        stack:
+          - "python@3.11"
         build:
             flavor: none
         source:
             root: main
-
         hooks:
             build: |
                 # Fail the build if any errors occur
-                set -eu
+                set -eux
 
                 # Download the latest version of pip
-                python3.12 -m pip install --upgrade pip
+                python3.11 -m pip install --upgrade pip
 
                 # Install dependencies
                 pip install -r requirements.txt   
-
         relationships:
             elasticsearch: 'elasticsearch:elasticsearch'
             # headlesschrome: 'headlesschrome:http'
