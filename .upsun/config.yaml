@@ -1,15 +1,22 @@
 applications:
 
     main:
-        type: php:7.4
+        type: python:3.12
         build:
             flavor: none
         source:
             root: main
 
-        # hooks:
-        #     build: |
-        #         curl -sS https://platform.sh/cli/installer | php
+        hooks:
+            build: |
+                # Fail the build if any errors occur
+                set -eu
+
+                # Download the latest version of pip
+                python3.9 -m pip install --upgrade pip
+
+                # Install dependencies
+                pip install -r requirements.txt   
 
         relationships:
             elasticsearch: 'elasticsearch:elasticsearch'
@@ -31,15 +38,17 @@ applications:
 
         # The configuration of app when it is exposed to the web.
         web:
-            locations:
-                "/":
-                    root: 'web'
-                    index: ['index.html']
-                "/relationships":
-                    # The public directory of the app, relative to its root.
-                    root: "relationships/web"
-                    # The front-controller script to send non-static requests to.
-                    passthru: "/relationships/index.php"
+            commands:
+                start: uvicorn main:app
+            # locations:
+            #     "/":
+            #         root: 'web'
+            #         index: ['index.html']
+            #     "/relationships":
+            #         # The public directory of the app, relative to its root.
+            #         root: "relationships/web"
+            #         # The front-controller script to send non-static requests to.
+            #         passthru: "/relationships/index.php"
 
 # crons:
 #     renewcert:
