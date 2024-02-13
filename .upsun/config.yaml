@@ -4,8 +4,8 @@ applications:
         # type: python:3.11
         stack:
           - "python@3.11"
-        build:
-            flavor: none
+        # build:
+        #     flavor: none
         source:
             root: main
         hooks:
