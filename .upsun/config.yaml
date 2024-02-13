@@ -4,6 +4,7 @@ applications:
         # type: python:3.11
         stack:
           - "python@3.11"
+          - "python311Packages.pip"
         # build:
         #     flavor: none
         source:
@@ -13,8 +14,8 @@ applications:
                 # Fail the build if any errors occur
                 set -eux
 
-                # Download the latest version of pip
-                python3.11 -m pip install --upgrade pip
+                # # Download the latest version of pip
+                # python -m pip install --upgrade pip
 
                 # Install dependencies
                 pip install -r requirements.txt   
