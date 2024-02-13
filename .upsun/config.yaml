@@ -1,26 +1,17 @@
 applications:
 
     main:
-        # type: python:3.11
         stack:
           - "python@3.11"
-          # - "python311Packages.pip"
-        # build:
-        #     flavor: none
         source:
             root: main
         hooks:
             build: |
-                # Fail the build if any errors occur
                 set -eux
-
-                # # Download the latest version of pip
-                # python -m pip install --upgrade pip
-
-                # Install dependencies
                 pip install -r requirements.txt   
         relationships:
-            elasticsearch: 'elasticsearch:elasticsearch'
+            elasticsearch:
+            
             # headlesschrome: 'headlesschrome:http'
             # influxdb: 'influxdb18:influxdb'
             # kafka: 'kafka25:kafka'
@@ -34,38 +25,9 @@ applications:
             # redis: 'redis6:redis'
             # solr: 'solr86:solr'
             # vault-kms: 'vault-kms:sign'
-
-
-
-        # The configuration of app when it is exposed to the web.
         web:
             commands:
                 start: uvicorn main:app --port $PORT
-            # locations:
-            #     "/":
-            #         root: 'web'
-            #         index: ['index.html']
-            #     "/relationships":
-            #         # The public directory of the app, relative to its root.
-            #         root: "relationships/web"
-            #         # The front-controller script to send non-static requests to.
-            #         passthru: "/relationships/index.php"
-
-# crons:
-#     renewcert:
-#         # Force a redeploy at 10 am (UTC) on the 1st and 15th of every month.
-#         spec: '0 10 1,15 * *'
-#         cmd: |
-#             if [ "$PLATFORM_BRANCH" = master ]; then
-#                 platform redeploy --yes --no-wait
-#             fi
-
-# mounts:
-#     networkstorage:
-#         source: service
-#         service: networkstorage
-#         source_path: networkstorage
-
 
 services:
 
