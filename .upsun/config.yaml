@@ -17,7 +17,7 @@ applications:
             elasticsearch:
             mariadb:
             postgresql:
-            redis:
+            # redis:
         web:
             commands:
                 start: uvicorn main:app --port $PORT
