@@ -89,7 +89,7 @@ services:
     #     type: rabbitmq:3.12
 
     redis:
-        type: redis:72
+        type: redis:7.2
     #     size: S
 
     # solr:
