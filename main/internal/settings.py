@@ -1,4 +1,4 @@
-API_STR="/api"
+API_STR=""
 
 title = "Upsun Examples"
 
@@ -9,34 +9,17 @@ head = """
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wdth,wght@0,75..100,400..700;1,75..100,400..700&family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
-
+    <link rel="stylesheet" href="/static/custom.css">
+    <link rel="stylesheet" href="/static/highlight.css">
 </head>
 """.format(title)
-
-styles = """
-<style>
-    body {
-        font-family: "Instrument Sans", sans-serif;
-        font-optical-sizing: auto;
-        font-weight: 500;
-        font-style: normal;
-        padding: 5rem;
-    }
-
-    h1, h2, h3 {
-        font-family: "Space Grotesk", sans-serif;
-        font-optical-sizing: auto;
-        /* font-weight: <weight>; */
-        font-style: normal;
-    }
-</style> 
-"""
 
 rel_lookup = {
     "elasticsearch": "Elasticsearch",
     "chrome-headless": "Headless Chrome",
-    "inflxudb": "InfluxDB",
+    "influxdb": "InfluxDB",
     "kafka": "Kafka",
+    "mysql": "MySQL/MariaDB",
     "mariadb": "MySQL/MariaDB",
     "memcached": "Memcached",
     "mongodb": "MongoDB",
@@ -49,12 +32,20 @@ rel_lookup = {
     "vault-kms": "Vault KMS"
 }
 
+rt_lookup = {
+    "golang": "Go",
+    "java": "Java",
+    "nodejs": "Node.js", 
+    "php": "PHP",
+    "python": "Python"
+}
+
 settings = {
     "API_STR": API_STR,
     "title": title,
     "content": {
         "head": head,
-        "styles": styles
     },
-    "rel_lookup": rel_lookup
+    "rel_lookup": rel_lookup,
+    "rt_lookup": rt_lookup
 }
