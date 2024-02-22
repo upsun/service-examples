@@ -1,0 +1,4 @@
+http:
+archive
+.upsun/solr-config
+./python

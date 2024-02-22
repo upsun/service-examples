@@ -1,0 +1,28 @@
+body {
+    font-family: "Instrument Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+    padding: 5rem;
+}
+
+h1, h2, h3 {
+    font-family: "Space Grotesk", sans-serif;
+    font-optical-sizing: auto;
+    /* font-weight: <weight>; */
+    font-style: normal;
+}
+
+details {
+    border: 1px solid grey;
+    padding: 1rem;
+    cursor: pointer;
+}
+
+details open > summary {
+    padding-bottom: 1rem;
+}
+
+.highlight {
+    padding: 1rem;
+}

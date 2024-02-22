@@ -1,0 +1,158 @@
+##########################################################################################
+applications:
+    main:
+        stack:
+          - "python@3.11"
+          - "nodejs@21"
+        source:
+            root: main
+        hooks:
+            build: |
+                set -eux
+                # Python
+                pip install -r requirements.txt
+                # Node.js
+                # npm prune --userconfig .npmrc && npm install --userconfig .npmrc
+        relationships:
+            elasticsearch:
+            mariadb:
+            postgresql:
+            # redis:
+        web:
+            commands:
+                start: uvicorn main:app --port $PORT
+##########################################################################################
+    # nodejs:
+    #     stack:
+    #       - "nodejs@21"
+    #     source:
+    #         root: nodejs
+    #     hooks:
+    #         build: |
+    #             set -eux
+    #             npm prune --userconfig .npmrc && npm install --userconfig .npmrc  
+    #     relationships:
+    #         elasticsearch:
+    #     web:
+    #         commands:
+    #             start: node index.js
+    #         locations:
+    #             "/public":
+    #                 passthru: false
+    #                 root: "public"
+    #                 allow: true
+    #                 rules:
+    #                     \.(css|js|gif|jpe?g|png|ttf|eot|woff2?|otf|html|ico|svg?)$:
+    #                       allow: true
+    #                     ^/robots\.txt$:
+    #                       allow: true
+    #     mounts:
+    #         "run":
+    #             source: storage
+    #             source_path: 'run'
+##########################################################################################
+
+
+services:
+
+    elasticsearch:
+        type: elasticsearch:7.10
+
+    # headlesschrome:
+    #     type: chrome-headless:120
+
+    # influxdb:
+    #     type: influxdb:2.7
+
+    # kafka25:
+    #     type: kafka:3.2
+
+    mariadb:
+        type: mariadb:11.2
+
+    # memcached:
+    #     type: memcached:1.6
+
+    # mongodb:
+    #     type: mongodb:4.0
+
+    # networkstorage:
+    #     type: network-storage:2.0
+
+    # opensearch:
+    #     type: opensearch:2
+
+    # oraclemysql:
+    #     type: oracle-mysql:8.0
+
+    postgresql:
+        type: postgresql:16
+
+    # rabbitmq:
+    #     type: rabbitmq:3.12
+
+    redis:
+        type: redis:7.2
+    #     size: S
+
+    # solr:
+    #     type: solr:9.2
+    #     disk: 256
+    #     configuration:
+    #         cores:
+    #             maincore:
+    #                 conf_dir: !archive "solr-config"
+    #         endpoints:
+    #             solr:
+    #                 core: maincore
+    # vault-kms:
+    #     type: vault-kms:1.12
+    #     configuration:
+    #         endpoints:
+    #             sign:
+    #                 - policy: admin
+    #                   key: vault-sign
+    #                   type: sign
+    #                 - policy: sign
+    #                   key: vault-sign
+    #                   type: sign
+    #                 - policy: verify
+    #                   key: vault-sign
+    #                   type: sign
+
+
+routes:
+
+    "https://{default}/":
+        id: main
+        type: upstream
+        upstream: "main:http"
+        cache:
+            enabled: true
+            cookies: []
+            default_ttl: 300
+
+    # "https://{default}/php":
+    #     id: php
+    #     type: upstream
+    #     upstream: "php:http"
+
+    # "https://{default}/nodejs":
+    #     id: nodejs
+    #     type: upstream
+    #     upstream: "nodejs:http"
+
+    # "https://{default}/python":
+    #     id: python
+    #     type: upstream
+    #     upstream: "python:http"
+
+    # "https://{default}/java":
+    #     id: java
+    #     type: upstream
+    #     upstream: "java:http"
+
+    # "https://{default}/golang":
+    #     id: golang
+    #     type: upstream
+    #     upstream: "golang:http"
