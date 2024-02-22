@@ -15,6 +15,9 @@ applications:
                 # npm prune --userconfig .npmrc && npm install --userconfig .npmrc
         relationships:
             elasticsearch:
+            mariadb:
+            postgresql:
+            redis:
         web:
             commands:
                 start: uvicorn main:app --port $PORT
