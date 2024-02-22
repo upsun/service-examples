@@ -12,7 +12,7 @@ applications:
                 # Python
                 pip install -r requirements.txt
                 # Node.js
-                npm prune --userconfig .npmrc && npm install --userconfig .npmrc
+                # npm prune --userconfig .npmrc && npm install --userconfig .npmrc
         relationships:
             elasticsearch:
         web:
